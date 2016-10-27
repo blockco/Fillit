@@ -14,27 +14,36 @@ CC =	gcc
 
 FLAG =	-Wall -Wextra -Werror -o
 
+LIBFT = libft/
+
+COMP =	make -C $(LIBFT) re
+
+COMPC = make -C $(LIBFT) clean
+
+COMPF = make -C $(LIBFT) fclean
+
 NAME =	fillit
 
-SRCS =	libft.a \
+SRCS =	$(LIBFT)libft.a \
 		check.c \
 		tools.c \
 		store.c \
 		solve.c \
 		hashfunc.c \
 		main.c \
-
-OBJS =	$(NAME)
+		countislands.c \
 
 all: 	$(NAME)
 
 $(NAME):
+		@$(COMP)
 		@$(CC) $(FLAG) $(NAME) $(SRCS)
 
 clean:
-		@/bin/rm -f $(OBJS)
+		@$(COMPC)
 
 fclean:	clean
+		@$(COMPF)
 		@/bin/rm -f $(NAME)
 
 re: fclean all

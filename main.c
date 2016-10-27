@@ -25,12 +25,16 @@ t_hash	*storepieces(char *av)
 		return (error("error: failed to open file"));
 	while (read(fd, str, SIZE + 1))
 	{
+		if(i == 26)
+			return (error("error: to many tetrimino's"));
 		str[SIZE] = '\0';
 		if (!tetriminocheck(str))
 			return (error("error: bad hash format"));
 		storepoints(&pieces, str, i);
 		i++;
 	}
+	if (i == 0)
+		return (error("error: no content"));
 	close(fd);
 	return (pieces);
 }
@@ -55,7 +59,7 @@ char	**build_board(unsigned int size)
 int		get_size(t_hash *lst)
 {
 	unsigned int	size;
-	unsigned int 	i;
+	unsigned int	i;
 
 	size = ft_hashcount(&lst);
 	size *= 4;
@@ -65,7 +69,7 @@ int		get_size(t_hash *lst)
 		i = find_sqrt(1, size);
 		size++;
 	}
-	return(i);
+	return (i);
 }
 
 int		main(int argc, char **argv)
